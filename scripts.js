@@ -24,7 +24,7 @@ window.addEventListener('load', function () {
         });
         showActionsInTable();
     } catch (err) {
-        console.error(err);
+        console.error('has no actions in local storage', err.message);
     }
 })
 
