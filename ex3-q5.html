@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function checkUser(users, user) {
+        return new Promise((resolve, reject) => {
+          setTimeout(() => {
+            let indexToFind = users.findIndex(
+              (u) => u.email === user.email && u.password === user.password
+            );
+            if (indexToFind != -1) resolve(user.email);
+            else reject(new Error("User not found"));
+          }, 2000);
+        });
+      }
+
+      let users = [
+        { email: "margol@gmail.com", password: "marg123" },
+        { email: "amit@gmail.com", password: "amit123" },
+        { email: "adi@gmail.com", password: "adi123" },
+      ];
+
+      async function mainCheck() {
+        try {
+          // success
+          let result = await checkUser(users, {
+            email: "amit@gmail.com",
+            password: "amit123",
+          });
+          alert(`Welcome ${result}`);
+          // fail
+          let result2 = await checkUser(users, {
+            email: "adi2@gmail.com",
+            password: "adi123",
+          });
+          alert(`Welcome ${result2}`);
+        } catch (error) {
+          alert(error);
+        }
+      }
+
+      mainCheck();
+    </script>
+  </body>
+</html>
